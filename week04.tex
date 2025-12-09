@@ -1,0 +1,476 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme[theme=blue,logo=logowithtextvi]{HUST} 
+\DeclareUnicodeCharacter{221E}{\ensuremath{\infty}}
+
+\usepackage[T5]{fontenc}
+\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{vietnam} % Uncomment nếu cần thiết tuỳ hệ thống
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc}
+\definecolor{codeblue}{RGB}{0,90,200}   % xanh nhạt
+\definecolor{codegold}{RGB}{210,160,0}
+
+\usepackage{minted}
+
+\setminted{
+	breaklines=false,
+	autogobble=false,
+	obeytabs=true,
+	tabsize=2,
+	linenos=true,
+	showspaces=false,
+	space=~,
+	baselinestretch=1,
+	fontsize=\normalsize
+}
+
+\newcommand{\placecontent}[4]{%
+  \tikz[remember picture,overlay]
+    \node[anchor=north west]
+      at ([xshift=#1,yshift=-#2]current page.north west)
+      {\parbox{#3}{#4}};
+}
+
+\graphicspath{{./week04_resources/}}
+
+\title{\huge CẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT}
+\author{SoICT - HUST}
+\date{}
+
+\begin{document}
+
+% 2 slides đầu tiên:
+\HUSTInsertBrandSlide
+\HUSTInsertThemeSlide
+
+% Slide tiêu đề
+{\HUSTUseBackground{onelove.pdf}
+\begin{frame}
+  \ifdefstring{\insertaspectratio}{169}{
+    \HUSTCornerImage[0.14]{assets/logo/soict_vi_h.pdf}
+    \placecontent{0.5cm}{0.33\paperheight}{0.85\paperwidth}{
+        \color{\HUSTFrameTitleTextColor}\bfseries\fontsize{22pt}{30pt}\selectfont
+        \inserttitle
+    }
+    \placecontent{0.5cm}{0.50\paperheight}{0.8\paperwidth}{
+        \color{\HUSTFrameTitleTextColor}\fontsize{14pt}{14pt}\selectfont
+        %Bài học
+        \textbf{\large TUẦN 4: NHÁNH VÀ CẬN}\\
+    }
+  }{}
+\end{frame}
+}
+
+% Outline
+\AtBeginSection[]
+{
+    \begin{frame}<beamer>
+        \frametitle{NỘI DUNG}
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+%Nội dung chính trong slides
+
+\section{Sơ đồ chung nhánh và cận}
+\begin{frame}[t]{SƠ ĐỒ CHUNG} % [t] = canh nội dung lên phía trên
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item Nhánh và cận (Branch and Bound): một trong số các phương pháp để
+		giải bài toán tối ưu tổ hợp
+		\begin{itemize}
+			\item Dùng kỹ thuật quay lui để liệt kê tất cả các phương án,
+			từ đó giữ lại phương án tốt nhất
+			\item Dùng đánh giá cận (cận trên với bài toán tìm max và cận dưới
+			với bài toán tìm min) để cắt bớt không gian tìm kiếm
+			trong quá trình liệt kê
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[t]{SƠ ĐỒ CHUNG}
+	\begin{columns}[T,onlytextwidth]
+		% Cột bên trái: chữ
+		\begin{column}{0.47\textwidth}
+			\setlength{\leftmargini}{-1.2em} % (tuỳ, để bullet đỡ thụt sâu)
+			\begin{itemize}
+				\item Xét bài toán tìm cực tiểu của hàm mục tiêu, trong đó
+				lời giải được biểu diễn bởi một bộ các biến:
+				\[
+				X = (X_1, X_2, \dots, X_n).
+				\]
+				\item Hàm \texttt{Try(k)} dùng để thử giá trị cho biến $X_k$
+				trong quá trình liệt kê.
+				\item Ký hiệu $f^*$: giá trị hàm mục tiêu của phương án
+				tốt nhất đã tìm được.
+			\end{itemize}
+		\end{column}
+		
+		% Cột bên phải: hình cây nhánh và cận
+		\begin{column}{0.53\textwidth}
+			\centering
+			\includegraphics[width=1.15\linewidth]{branch_and_bound_tree.png}
+			% hoặc tên file đúng với file bạn lưu
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}[t]{SƠ ĐỒ CHUNG}
+	\begin{columns}[T,onlytextwidth]
+		% Cột bên trái: text
+		\begin{column}{0.47\textwidth}
+			\setlength{\leftmargini}{-1.2em}
+			\begin{itemize}
+				\item Sau khi gán giá trị $v$ cho $X_k$, ta đánh giá
+				cận dưới $g$ của hàm mục tiêu của các phương án
+				phát triển tiếp từ điểm 13.
+				\item Nếu $g \geq f^*$ thì không phát triển tiếp
+				lời giải từ điểm 13.
+			\end{itemize}
+		\end{column}
+		
+		% Cột bên phải: hình cây nhánh và cận
+		\begin{column}{0.53\textwidth}
+			\centering
+			\includegraphics[width=1.15\linewidth]{branch_and_bound_tree.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\section{Bài toán người du lịch}
+\begin{frame}[t]{BÀI TOÁN NGƯỜI DU LỊCH}
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item Phát biểu bài toán:
+		\begin{itemize}
+			\item Một người du lịch muốn đi tham quan $n$ thành phố $1, 2, \ldots, n$.
+			\item \textit{Hành trình} là cách đi xuất phát từ thành phố 1 đi qua
+			tất cả các thành phố còn lại, mỗi thành phố đúng một lần,
+			rồi quay trở lại thành phố xuất phát 1.
+			\item Biết $c(i,j)$ là chi phí đi từ thành phố $i$ đến thành phố $j$
+			($i,j = 1,2,\ldots,n$).
+			\item Tìm hành trình với tổng chi phí là nhỏ nhất.
+		\end{itemize}
+		
+		\item Một số nhận xét:
+		\begin{itemize}
+			\item Số lượng hành trình của người du lịch là $(n-1)!$.
+			\item Ta có tương ứng 1-1 giữa một hành trình của người du lịch:
+			\[
+			1 \to x[2] \to x[3] \to \ldots \to x[n] \to 1
+			\]
+			với một hoán vị $x = (x[2], x[3], \ldots, x[n])$ của $n-1$
+			số tự nhiên $2,3,\ldots,n$.
+			\item Chi phí hành trình:
+			$\displaystyle f(x) = c(1,x[2]) + c(x[2],x[3]) + \ldots
+			+ c(x[n-1],x[n]) + c(x[n],1).$
+			
+		\end{itemize}
+	\end{itemize}
+	
+	% Ảnh + caption ghim bên phải, không ảnh hưởng khối text
+	\placecontent{0.77\paperwidth}{0.32\paperheight}{0.24\paperwidth}{
+		\centering
+		\includegraphics[width=0.5\linewidth]{hamilton.png}\\[0.3em]
+		 {\tiny\bfseries          % cỡ nhỏ + in đậm
+		 	Sir William Rowan Hamilton [1]\\[-0.9em] % khoảng cách 2 dòng
+		 	(1805--1865)
+		 }
+	}
+	
+\end{frame}
+
+
+\begin{frame}[t,fragile]{BÀI TOÁN NGƯỜI DU LỊCH}
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item Giải bằng phương pháp duyệt toàn bộ:
+		\begin{itemize}
+			\item Hành trình:  $x = (1, x[2], x[3], \ldots, x[n], 1)$
+		\end{itemize}
+	\end{itemize}
+	
+	\vspace{0.3cm}  
+	
+	%===== HAI KHUNG CODE + CỘT CHỮ + MŨI TÊN =====
+	\begin{tikzpicture}
+		% Khung code bên trái (pseudo-code), sát mép trái
+		\node (L) [inner sep=0pt, anchor=north west] at (0,0)
+		{%
+			\begin{minipage}[t]{0.40\textwidth}
+				\begin{minted}[
+					fontsize=\tiny,
+					frame=single,
+					framesep=1mm,
+					xleftmargin=-20pt,
+					numbers=none,
+					autogobble=true,
+					escapeinside=||
+					]{text}
+					|{\color{codeblue}try(k) \{ }||{\color{codegold}// thử các giá trị có thể gán cho x[k]}|
+						|{\color{codeblue}for v in candidates(k) do \{}|
+							|{\color{codeblue}if (check(v,k)) then \{}|
+								|{\color{codeblue}x[k] = v;}|
+									|{\color{red}[Update the data structure D]}|
+									|{\color{codeblue}if (k == n) then solution();}|
+									|{\color{codeblue}else try(k+1);}| 
+									|{\color{red}[Recover the data structure D]}|
+								|{\color{codeblue}\}}|
+							|{\color{codeblue}\}}|
+						|{\color{codeblue}\}}|
+				\end{minted}
+			\end{minipage}
+		};
+		
+		% Khung code bên phải (C/C++), sát mép phải
+		\node (R) [inner sep=0pt, anchor=north east] at (\textwidth,0)
+		{%
+			\begin{minipage}[t]{0.38\textwidth}
+			\begin{minted}[
+				fontsize=\tiny,
+				frame=single,
+				framesep=1mm,
+				xrightmargin=-22pt,
+				numbers=none,
+				autogobble=true,
+				escapeinside=|| % để chèn \color{red}
+				]{text}
+				Init:
+				* f* = +∞; f = 0;  x[1] = 1;
+				* for (int v = 2; v <= n; v++) visited[v] = 0;
+				
+				void Try(int k) {
+					for (int v = 2; v <= n; v++) {
+						if (!visited[v]) {
+							x[k] = v;
+							|{\color{red}visited[v] = 1;}|
+							|{\color{red}f = f + c(x[k-1], x[k]);}|
+							if (k == n) { // Update record
+								int ftemp = f + c(x[n], x[1]);
+								if (ftemp < f*) f* = ftemp;
+							}
+							else Try(k + 1);
+							|{\color{red}f = f - c(x[k-1], x[k]);}|
+							|{\color{red}visited[v] = 0;}|
+						}
+					}
+				}
+			\end{minted}
+			
+			\end{minipage}
+		};
+		
+		% Cột chữ “Cần xác định …” đặt giữa hai khung, khoảng giữa chiều cao
+		\coordinate (Astart) at ([yshift=1.5cm]L.south east);
+		\coordinate (Aend)   at ([yshift=3.613cm]R.south west);
+		\draw[->] (Astart) -- (Aend);
+		\node[anchor=south west]   % góc dưới-trái của block chữ nằm tại toạ độ chỉ định
+		at ($(Astart)+(0.3,-0.1cm)$) {   % dịch block chữ lên trên mũi tên 0.15cm
+			\scriptsize
+			\begin{tabular}{@{}l@{}}
+				Cần xác định: \\
+				1) \texttt{candidates(k)} \\
+				2) \texttt{check(v,k)}
+			\end{tabular}
+		};
+
+		
+	\end{tikzpicture}
+	
+\end{frame}
+
+\begin{frame}[t]{BÀI TOÁN NGƯỜI DU LỊCH}
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item[] \textbf{Giải bằng phương pháp nhánh và cận}
+		\item[] {\color{HUSTRed}\textbf{Tính cận:}}
+	\end{itemize}
+	
+	\begin{itemize}
+		\item Ký hiệu 
+		$c_{\min} = \displaystyle\min \{\, c(i,j) \mid i,j = 1,2,\ldots,n,\ i \neq j \,\}$
+		là chi phí đi lại nhỏ nhất giữa các thành phố.
+		
+		\item Cận ước lượng chi phí hành trình đầy đủ cho nhánh hiện tại
+		tương ứng với hành trình bộ phận $(1,u_2,\ldots,u_k)$ đã đi qua $k$
+		thành phố:
+		\[
+		1 \rightarrow u_2 \rightarrow \cdots \rightarrow u_{k-1} \rightarrow u_k.
+		\]
+		
+		\item Nếu cận dưới $g(1,u_2,\ldots,u_k) \ge f^*$ thì không đi tiếp từ
+		hành trình bộ phận $(1,u_2,\ldots,u_k)$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{BÀI TOÁN NGƯỜI DU LỊCH}
+	\small                        % <-- thu nhỏ cỡ chữ một chút
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item Cận ước lượng chi phí hành trình đầy đủ cho nhánh hiện tại
+		tương ứng với hành trình bộ phận $(1,u_2,\ldots,u_k)$ đã đi qua
+		$k$ thành phố: $	1 \rightarrow u_2 \rightarrow \cdots \rightarrow u_{k-1} \rightarrow u_k$
+		
+		\vspace{-0.4em}            % bớt khoảng trống
+		
+		\begin{itemize}
+			\item Chi phí phải trả theo hành trình bộ phận $(1,u_2,\ldots,u_k)$ là
+			\[
+			\sigma = c(1,u_2) + c(u_2,u_3) + \cdots + c(u_{k-1},u_k).
+			\]
+			
+			\vspace{-0.4em}
+			
+			\item Để phát triển thành hành trình đầy đủ:
+			\[
+			\textcolor{HUSTRed}{1 \rightarrow u_2 \rightarrow \cdots \rightarrow u_{k-1}
+				\rightarrow u_k}
+			\rightarrow u_{k+1} \rightarrow u_{k+2} \rightarrow \cdots \rightarrow u_n
+			\rightarrow 1
+			\]
+		\end{itemize}
+		
+		\vspace{-0.4em}
+		
+		\item Ta còn phải đi $n-k+1$ đoạn đường nữa, mỗi đoạn đường có chi phí
+		không ít hơn $c_{\min}$, nên đoạn đường chưa đi có chi phí ít ra là
+		$(n-k+1)c_{\min}$.
+		
+		\vspace{-0.2em}
+		
+		\item Vậy nếu đã đi hành trình bộ phận $(1,u_2,\ldots,u_k)$ thì đoạn đường
+		còn lại dù đi thế nào thì tổng chi phí cũng lớn hơn hoặc bằng
+		\( g(1,u_2,\ldots,u_k) = \sigma + (n-k+1)c_{\min}. \)
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t,fragile]{BÀI TOÁN NGƯỜI DU LỊCH}
+	\setlength{\leftmargini}{-1.2em}
+	
+	\begin{itemize}
+		\item Hàm \texttt{Try(k)} tìm lời giải tối ưu cho bài toán người du lịch
+		có sử dụng kỹ thuật {\color{HUSTRed}\textbf{nhánh}%
+			\tikz[remember picture,baseline] \node (nhanh) {};%
+			\textbf{ và cận}}.
+	\end{itemize}
+	
+
+	
+	%===== HAI KHUNG CODE, CẠNH DƯỚI TRÙNG NHAU =====
+\centering % <-- Rất quan trọng để căn giữa cả hình
+
+\begin{tikzpicture}[remember picture]
+	%=== Khung bên trái: Main() ===
+	\node (L) [inner sep=0pt, anchor=south east] at (-0.75,0)
+	{%
+		\begin{minipage}[t]{0.30\textwidth}
+			\begin{minted}[
+				fontsize=\tiny,
+				frame=single,
+				framesep=1mm,
+				xleftmargin=-20pt,
+				numbers=none,
+				autogobble=true
+				]{text}
+				Main() {
+					//Init:
+					f* = +∞;  f = 0;  x[1] = 1;
+					for v = 2 to n do  visited[v] = false;
+					Try(2);
+					print(f*);
+				}
+			\end{minted}
+		\end{minipage}
+	};
+	
+	%=== Khung bên phải: Try(k) ===
+	\node (R) [inner sep=0pt, anchor=south west] at (0.75,0)
+	{%
+		\begin{minipage}[t]{0.30\textwidth}
+			\begin{minted}[
+				fontsize=\tiny,
+				frame=single,
+				framesep=1mm,
+				xrightmargin=-22pt,
+				numbers=none,
+				autogobble=true,
+				escapeinside=|| % để chèn \color{red}
+				]{text}
+				Try(k) {
+					for v = 2 to n do {
+						if not visited[v] {
+							x[k] = v;
+							visited[v] = true;
+							f = f + c(x[k-1], x[k]);
+							if k = n then { //Update record
+								int ftemp = f + c(x[n], x[1]);
+								if (ftemp < f*) f* = ftemp;
+							}
+					|{\fcolorbox{red}{white}{\ttfamily\color{red}\shortstack[l]{\hspace*{1.5em}else \{\\\hspace*{3em}g = f + (n-k+1)*cmin;\\\hspace*{3em}if g < f* then Try(k+1);\\\hspace*{1em}\}}}}|
+							  
+							
+							f = f - c(x[k-1], x[k]);
+							visited[v] = false;
+						}
+					}
+				}
+				
+			\end{minted}
+		\end{minipage}
+	};
+	
+	\coordinate (elseTopRight) at
+	($(R.north east)!0.46!(R.south east)$);
+	
+\end{tikzpicture}
+
+\begin{tikzpicture}[remember picture,overlay]
+	\draw[->,thick,HUSTRed]
+	([xshift=-1.5em, yshift=0ex]nhanh.south) -- ([xshift=-0.8em]elseTopRight);
+\end{tikzpicture}
+
+
+
+	
+\end{frame}
+
+
+
+
+
+%Hết
+
+{\HUSTUseBackground{theme_hust_oneside.pdf}
+\begin{frame}
+  \ifdefstring{\insertaspectratio}{169}{
+    \placecontent{0.355\paperwidth}{0.410\paperheight}{0.640\paperwidth}{
+        \color{HUSTRed}\bfseries\fontsize{28pt}{36pt}\selectfont\centering
+        THANK YOU!
+    }
+  }{}
+  \ifdefstring{\insertaspectratio}{43}{
+    \placecontent{0.355\paperwidth}{0.440\paperheight}{0.640\paperwidth}{
+        \color{HUSTRed}\bfseries\fontsize{28pt}{36pt}\selectfont\centering
+        THANK YOU!
+    }
+  }{}
+\end{frame}
+}
+
+\end{document}
