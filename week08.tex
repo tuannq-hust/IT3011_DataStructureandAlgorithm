@@ -40,7 +40,7 @@
 	{\parbox{#3}{#4}};
 }
 
-\graphicspath{{./week 8 resources/}}
+% \graphicspath{{./week08_resources/}}
 
 \title{\huge CẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT}
 \author{SoICT - HUST}
@@ -112,14 +112,14 @@
 				\vspace{0.15cm}
 				\centering
 				% ĐỔI <push_pop_image> thành đường dẫn ảnh của bạn
-				\includegraphics[width=\linewidth]{week 8 resources/push_pop_image.png}
+				\includegraphics[width=\linewidth]{week08_resources/push_pop_image.png}
 				
 			\end{column}
 		\end{columns}
 		\vspace*{-1.7cm}
 		\hspace{7.7cm}
 		% ĐỔI <bottom_strip_image> thành đường dẫn ảnh của bạn
-		\includegraphics[width=0.44\textwidth]{week 8 resources/bottom_strip_image.png}
+		\includegraphics[width=0.44\textwidth]{week08_resources/bottom_strip_image.png}
 		
 	\end{frame}
 	
@@ -368,7 +368,7 @@
 					arc=0pt,
 					left=6pt,right=6pt,top=6pt,bottom=6pt
 					]
-					\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=||]{c}
+					\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=|]{c}
 						Node* push(Node* head, char v){
 							Node* new_node = makeNode(v);|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (mkMake) {};|
 							
@@ -404,92 +404,93 @@
 			{Nếu ngăn xếp không rỗng, biến\\node mới tạo thành phần tử\\đầu danh sách};
 			
 			% ====== GREEN HIGHLIGHT BOX (fit đúng khối else) ======
-			\coordinate (gTL) at ([xshift=-12pt,yshift=10pt]blkTL); 
-			\coordinate (gBR) at ([xshift=40pt,yshift=-4pt]blkBR); \draw[green!60!black, line width=1.0pt] (gTL) rectangle (gBR);
+			% \coordinate (gTL) at ([xshift=-12pt,yshift=10pt]blkTL); 
+			% \coordinate (gBR) at ([xshift=40pt,yshift=-4pt]blkBR); 
+			% \draw[green!60!black, line width=1.0pt] (gTL) rectangle (gBR);
 			
-			% ====== ARROWS: luôn dính đúng NOTE và trỏ đúng DÒNG CODE ======
-			\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
+	% 		% ====== ARROWS: luôn dính đúng NOTE và trỏ đúng DÒNG CODE ======
+	% 		\tikzset{myarr/.style={-Stealth, line width=0.85pt}};
 			
-			% đích (tự chỉnh xshift/yshift nếu cần)
-			\coordinate (tMake) at ([xshift=-6pt,yshift=0pt]mkMake);
-			\coordinate (tRet)  at ([xshift=-6pt,yshift=0pt]mkRet);
-			\coordinate (tElse) at ([xshift=-6pt,yshift=0pt]mkElse);
+	% 		% đích (tự chỉnh xshift/yshift nếu cần)
+	% 		\coordinate (tMake) at ([xshift=-6pt,yshift=0pt]mkMake);
+	% 		\coordinate (tRet)  at ([xshift=-6pt,yshift=0pt]mkRet);
+	% 		\coordinate (tElse) at ([xshift=-6pt,yshift=0pt]mkElse);
 			
-			% vẽ: xuất phát đúng note (không dùng |- nữa)
-			\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.15] (tMake);
-			\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.15] (tRet);
-			\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.15] (tElse);
+	% 		% vẽ: xuất phát đúng note (không dùng |- nữa)
+	% 		\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.15] (tMake);
+	% 		\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.15] (tRet);
+	% 		\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.15] (tElse);
 			
 		\end{tikzpicture}
 		
 	\end{frame}
 	
-	\begin{frame}[t,fragile]{Cài đặt ngăn xếp sử dụng danh sách liên kết đơn}
-		\setlength{\leftmargini}{-1.2em}
-		\small
-		\begin{itemize}
-			\item Thao tác Pop
-		\end{itemize}
+	% \begin{frame}[t,fragile]{Cài đặt ngăn xếp sử dụng danh sách liên kết đơn}
+	% 	\setlength{\leftmargini}{-1.2em}
+	% 	\small
+	% 	\begin{itemize}
+	% 		\item Thao tác Pop
+	% 	\end{itemize}
 		
-		\vspace{0.15cm}
+	% 	\vspace{0.15cm}
 		
-		\begin{tikzpicture}[remember picture]
-			% --- Code box (left) ---
-			\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
-				\begin{tcolorbox}[
-					width=0.62\textwidth,
-					height=0.60\textheight,
-					colback=white,
-					colframe=black,
-					boxrule=0.6pt,
-					arc=0pt,
-					left=6pt,right=6pt,top=6pt,bottom=6pt
-					]
-					\begin{minted}[fontsize=\large, breaklines, linenos=false, escapeinside=||]{c}
-						Node* pop(Node* head){
-							if(head == NULL) return head;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (pEmptyRet) {};|
+	% 	\begin{tikzpicture}[remember picture]
+	% 		% --- Code box (left) ---
+	% 		\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
+	% 			\begin{tcolorbox}[
+	% 				width=0.62\textwidth,
+	% 				height=0.60\textheight,
+	% 				colback=white,
+	% 				colframe=black,
+	% 				boxrule=0.6pt,
+	% 				arc=0pt,
+	% 				left=6pt,right=6pt,top=6pt,bottom=6pt
+	% 				]
+	% 				\begin{minted}[fontsize=\large, breaklines, linenos=false, escapeinside=||]{c}
+	% 					Node* pop(Node* head){
+	% 						if(head == NULL) return head;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (pEmptyRet) {};|
 							
-							|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blkTL) {};|Node* p = head;
-							head = head->next;
-							free(p);
-							return head;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blkBR) {};|
-						}
-					\end{minted}
-				\end{tcolorbox}
-			};
+	% 						|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blkTL) {};|Node* p = head;
+	% 						head = head->next;
+	% 						free(p);
+	% 						return head;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blkBR) {};|
+	% 					}
+	% 				\end{minted}
+	% 			\end{tcolorbox}
+	% 		};
 			
-			% ====== GREEN HIGHLIGHT BOX (nới ngang để bao hết) ======
-			\coordinate (gTL) at ([xshift=-12pt,yshift=10pt]blkTL);
-			\coordinate (gBR) at ([xshift=40pt,yshift=-4pt]blkBR);
-			\draw[green!60!black, line width=1.0pt] (gTL) rectangle (gBR);
+	% 		% ====== GREEN HIGHLIGHT BOX (nới ngang để bao hết) ======
+	% 		\coordinate (gTL) at ([xshift=-12pt,yshift=10pt]blkTL);
+	% 		\coordinate (gBR) at ([xshift=40pt,yshift=-4pt]blkBR);
+	% 		\draw[green!60!black, line width=1.0pt] (gTL) rectangle (gBR);
 			
-			% điểm giữa cạnh phải khung xanh (để cắm mũi tên 2)
-			\coordinate (gMid)   at ($(gTL)!0.5!(gBR)$);
-			\coordinate (gRight) at ($(gBR |- gMid)$);
+	% 		% điểm giữa cạnh phải khung xanh (để cắm mũi tên 2)
+	% 		\coordinate (gMid)   at ($(gTL)!0.5!(gBR)$);
+	% 		\coordinate (gRight) at ($(gBR |- gMid)$);
 			
-			% --- Callout boxes (right) ---
-			% ĐẶT NOTE THEO ĐÚNG CAO ĐỘ CỦA DÒNG CODE (để mũi tên luôn ngang & dính đúng khung)
-			\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
-			minimum width=0.30\textwidth, minimum height=1.05cm,
-			anchor=west, outer sep=0pt]
-			at ($(codebox.east |- pEmptyRet)+(0.95cm,0)$)
-			{Nếu ngăn xếp rỗng, trả về rỗng};
+	% 		% --- Callout boxes (right) ---
+	% 		% ĐẶT NOTE THEO ĐÚNG CAO ĐỘ CỦA DÒNG CODE (để mũi tên luôn ngang & dính đúng khung)
+	% 		\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
+	% 		minimum width=0.30\textwidth, minimum height=1.05cm,
+	% 		anchor=west, outer sep=0pt]
+	% 		at ($(codebox.east |- pEmptyRet)+(0.95cm,0)$)
+	% 		{Nếu ngăn xếp rỗng, trả về rỗng};
 			
-			\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
-			minimum width=0.30\textwidth, minimum height=2.05cm,
-			anchor=west, outer sep=0pt]
-			at ($(codebox.east |- gRight)+(0.95cm,0)$)
-			{Nếu ngăn xếp không rỗng, xóa phần\\tử đầu của ngăn xếp và trả về phần\\tử đầu của ngăn xếp};
+	% 		\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
+	% 		minimum width=0.30\textwidth, minimum height=2.05cm,
+	% 		anchor=west, outer sep=0pt]
+	% 		at ($(codebox.east |- gRight)+(0.95cm,0)$)
+	% 		{Nếu ngăn xếp không rỗng, xóa phần\\tử đầu của ngăn xếp và trả về phần\\tử đầu của ngăn xếp};
 			
-			% ====== ARROWS: NOTE -> CODE (đuôi dính mép note, đầu ở code) ======
-			\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
+	% 		% ====== ARROWS: NOTE -> CODE (đuôi dính mép note, đầu ở code) ======
+	% 		\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
 			
-			% nhích nhẹ mục tiêu về bên trái để đầu mũi tên không chạm chữ
-			\draw[myarr] (note1.west) -- ([xshift=-1pt]pEmptyRet);
-			\draw[myarr] (note2.west) -- (gRight);
+	% 		% nhích nhẹ mục tiêu về bên trái để đầu mũi tên không chạm chữ
+	% 		\draw[myarr] (note1.west) -- ([xshift=-1pt]pEmptyRet);
+	% 		\draw[myarr] (note2.west) -- (gRight);
 			
-		\end{tikzpicture}
-	\end{frame}
+	% 	\end{tikzpicture}
+	% \end{frame}
 	
 	%================== SLIDE 10 ==================%
 	\begin{frame}[t,fragile]{Cài đặt ngăn xếp sử dụng danh sách liên kết đơn}
@@ -1938,201 +1939,201 @@
 			\end{tikzpicture}
 		\end{frame}
 		
-		\begin{frame}[t,fragile]{Cài đặt hàng đợi sử dụng danh sách liên kết đơn}
-			\setlength{\leftmargini}{-1.2em}
-			\large
-			\begin{itemize}
-				\item Thao tác Enqueue
-			\end{itemize}
+		% \begin{frame}[t,fragile]{Cài đặt hàng đợi sử dụng danh sách liên kết đơn}
+		% 	\setlength{\leftmargini}{-1.2em}
+		% 	\large
+		% 	\begin{itemize}
+		% 		\item Thao tác Enqueue
+		% 	\end{itemize}
 			
-			\vspace{0.15cm}
+		% 	\vspace{0.15cm}
 			
-			\begin{tikzpicture}[remember picture]
-				% --- Code box (left) ---
-				\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
-					\begin{tcolorbox}[
-						width=0.62\textwidth,
-						height=0.60\textheight,
-						colback=white,
-						colframe=blue!55!black,
-						boxrule=0.6pt,
-						arc=0pt,
-						left=6pt,right=6pt,top=6pt,bottom=6pt
-						]
-						\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=||]{c}
-							Node* enqueue(Node* head, char v){
-								Node* new_node = makeNode(v);|\tikz[remember picture,overlay]\node (mkMake) {};|
+		% 	\begin{tikzpicture}[remember picture]
+		% 		% --- Code box (left) ---
+		% 		\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
+		% 			\begin{tcolorbox}[
+		% 				width=0.62\textwidth,
+		% 				height=0.60\textheight,
+		% 				colback=white,
+		% 				colframe=blue!55!black,
+		% 				boxrule=0.6pt,
+		% 				arc=0pt,
+		% 				left=6pt,right=6pt,top=6pt,bottom=6pt
+		% 				]
+		% 				\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=||]{c}
+		% 					Node* enqueue(Node* head, char v){
+		% 						Node* new_node = makeNode(v);|\tikz[remember picture,overlay]\node (mkMake) {};|
 								
-								if(head == NULL) return new_node;|\tikz[remember picture,overlay]\node (mkRet) {};|
+		% 						if(head == NULL) return new_node;|\tikz[remember picture,overlay]\node (mkRet) {};|
 								
-								else{
-									|\tikz[remember picture,overlay]\node (blkTL) {};|new_node->next = head;|\tikz[remember picture,overlay]\node (mkElse) {};|
-									head = new_node;
-									return head;|\tikz[remember picture,overlay]\node (blkBR) {};|
-								}
-							}
-						\end{minted}
-					\end{tcolorbox}
-				};
+		% 						else{
+		% 							|\tikz[remember picture,overlay]\node (blkTL) {};|new_node->next = head;|\tikz[remember picture,overlay]\node (mkElse) {};|
+		% 							head = new_node;
+		% 							return head;|\tikz[remember picture,overlay]\node (blkBR) {};|
+		% 						}
+		% 					}
+		% 				\end{minted}
+		% 			\end{tcolorbox}
+		% 		};
 				
-				% --- Callout boxes (right) ---
-				\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
-				minimum width=0.30\textwidth, minimum height=0.90cm,
-				anchor=west]
-				at ($(codebox.north east)+(0.95cm,-1.15cm)$)
-				{Tạo một node mới};
+		% 		% --- Callout boxes (right) ---
+		% 		\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
+		% 		minimum width=0.30\textwidth, minimum height=0.90cm,
+		% 		anchor=west]
+		% 		at ($(codebox.north east)+(0.95cm,-1.15cm)$)
+		% 		{Tạo một node mới};
 				
-				\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
-				minimum width=0.30\textwidth, minimum height=1.20cm,
-				anchor=west]
-				at ($(codebox.north east)+(0.95cm,-2.75cm)$)
-				{Nếu hàng đợi rỗng, trả về\\phần tử mới tạo};
+		% 		\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
+		% 		minimum width=0.30\textwidth, minimum height=1.20cm,
+		% 		anchor=west]
+		% 		at ($(codebox.north east)+(0.95cm,-2.75cm)$)
+		% 		{Nếu hàng đợi rỗng, trả về\\phần tử mới tạo};
 				
-				\node (note3) [draw, rectangle, thick, align=center, font=\scriptsize,
-				minimum width=0.30\textwidth, minimum height=1.80cm,
-				anchor=west]
-				at ($(codebox.north east)+(0.95cm,-4.65cm)$)
-				{Nếu hàng đợi không rỗng, biến\\node mới tạo thành phần tử\\đầu danh sách};
+		% 		\node (note3) [draw, rectangle, thick, align=center, font=\scriptsize,
+		% 		minimum width=0.30\textwidth, minimum height=1.80cm,
+		% 		anchor=west]
+		% 		at ($(codebox.north east)+(0.95cm,-4.65cm)$)
+		% 		{Nếu hàng đợi không rỗng, biến\\node mới tạo thành phần tử\\đầu danh sách};
 				
-				% ====== GREEN HIGHLIGHT BOX: dùng FIT để ôm đúng khối else ======
-				\coordinate (fitTL) at ([xshift=-6pt,yshift=6pt]blkTL);
-				\coordinate (fitBR) at ([xshift=38pt,yshift=-6pt]blkBR);
-				\node[draw=green!60!black, line width=1pt,
-				fit=(fitTL)(fitBR)] (gbox) {};
+		% 		% ====== GREEN HIGHLIGHT BOX: dùng FIT để ôm đúng khối else ======
+		% 		\coordinate (fitTL) at ([xshift=-6pt,yshift=6pt]blkTL);
+		% 		\coordinate (fitBR) at ([xshift=38pt,yshift=-6pt]blkBR);
+		% 		\node[draw=green!60!black, line width=1pt,
+		% 		fit=(fitTL)(fitBR)] (gbox) {};
 				
-				% ====== ARROWS: NOTE -> CODE (cắm đúng) ======
-				\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
+		% 		% ====== ARROWS: NOTE -> CODE (cắm đúng) ======
+		% 		\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
 				
-				% đích (bạn có thể chỉnh xshift/yshift để trỏ chuẩn hơn)
-				\coordinate (tMake) at ([xshift=-6pt,yshift=0pt]mkMake);
-				\coordinate (tRet)  at ([xshift=-6pt,yshift=0pt]mkRet);
-				\coordinate (tElse) at ([xshift=-6pt,yshift=0pt]mkElse);
+		% 		% đích (bạn có thể chỉnh xshift/yshift để trỏ chuẩn hơn)
+		% 		\coordinate (tMake) at ([xshift=-6pt,yshift=0pt]mkMake);
+		% 		\coordinate (tRet)  at ([xshift=-6pt,yshift=0pt]mkRet);
+		% 		\coordinate (tElse) at ([xshift=-6pt,yshift=0pt]mkElse);
 				
-				% vẽ: xuất phát luôn từ đúng note (không dùng |- nữa)
-				\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.15] (tMake);
-				\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.15] (tRet);
-				\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.15] (tElse);
-			\end{tikzpicture}
-		\end{frame}
+		% 		% vẽ: xuất phát luôn từ đúng note (không dùng |- nữa)
+		% 		\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.15] (tMake);
+		% 		\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.15] (tRet);
+		% 		\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.15] (tElse);
+		% 	\end{tikzpicture}
+		% \end{frame}
 		
-	\begin{frame}[t,fragile]{Cài đặt hàng đợi sử dụng danh sách liên kết đơn}
-		\setlength{\leftmargini}{-1.2em}
+	% \begin{frame}[t,fragile]{Cài đặt hàng đợi sử dụng danh sách liên kết đơn}
+	% 	\setlength{\leftmargini}{-1.2em}
 		
-		\vspace{-0.25cm}
-		\begin{columns}[T,onlytextwidth]
-			% ====== COL 1: bullet (trái) ======
-			\begin{column}{0.2\textwidth}
-				\large
-				\begin{itemize}
-					\item Thao tác Dequeue
-				\end{itemize}
-			\end{column}
+	% 	\vspace{-0.25cm}
+	% 	\begin{columns}[T,onlytextwidth]
+	% 		% ====== COL 1: bullet (trái) ======
+	% 		\begin{column}{0.2\textwidth}
+	% 			\large
+	% 			\begin{itemize}
+	% 				\item Thao tác Dequeue
+	% 			\end{itemize}
+	% 		\end{column}
 			
-			% ====== COL 2: code (giữa) ======
-			\begin{column}{0.42\textwidth}
-				\vspace{-0.05cm}
-				\begin{tikzpicture}[remember picture]
-					\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
-						\begin{tcolorbox}[
-							width=\linewidth,
-							% KHÔNG set height cứng để tránh tràn
-							colback=white,
-							colframe=blue!55!black,
-							boxrule=0.6pt,
-							arc=0pt,
-							left=-60pt,right=6pt,top=6pt,bottom=6pt
-							]
-							\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=||]{c}
-								char dequeue(Node** head){
-									if(*head == NULL) return NULL;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (mkEmpty) {};|
-									Node* p, *q;
-									p = *head;
-									char ans;
-									|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk1TL) {};|if(p->next == NULL){
-										ans = p->value;
-										free(p);
-										*head = NULL;
-										return ans;
-									}|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk1BR) {};|
-									|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk2TL) {};|while(p->next->next != NULL){
-										p = p->next;
-									}
-									q = p->next;
-									p->next = NULL;
-									ans = q->value;
-									free(q);
-									return ans;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk2BR) {};|
-								}
-							\end{minted}
-						\end{tcolorbox}
-					};
+	% 		% ====== COL 2: code (giữa) ======
+	% 		\begin{column}{0.42\textwidth}
+	% 			\vspace{-0.05cm}
+	% 			\begin{tikzpicture}[remember picture]
+	% 				\node (codebox) [anchor=north west, inner sep=0pt] at (0,0) {%
+	% 					\begin{tcolorbox}[
+	% 						width=\linewidth,
+	% 						% KHÔNG set height cứng để tránh tràn
+	% 						colback=white,
+	% 						colframe=blue!55!black,
+	% 						boxrule=0.6pt,
+	% 						arc=0pt,
+	% 						left=-60pt,right=6pt,top=6pt,bottom=6pt
+	% 						]
+	% 						\begin{minted}[fontsize=\scriptsize, breaklines, linenos=false, escapeinside=||]{c}
+	% 							char dequeue(Node** head){
+	% 								if(*head == NULL) return NULL;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (mkEmpty) {};|
+	% 								Node* p, *q;
+	% 								p = *head;
+	% 								char ans;
+	% 								|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk1TL) {};|if(p->next == NULL){
+	% 									ans = p->value;
+	% 									free(p);
+	% 									*head = NULL;
+	% 									return ans;
+	% 								}|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk1BR) {};|
+	% 								|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk2TL) {};|while(p->next->next != NULL){
+	% 									p = p->next;
+	% 								}
+	% 								q = p->next;
+	% 								p->next = NULL;
+	% 								ans = q->value;
+	% 								free(q);
+	% 								return ans;|\tikz[remember picture,overlay]\node[inner sep=0pt,outer sep=0pt] (blk2BR) {};|
+	% 							}
+	% 						\end{minted}
+	% 					\end{tcolorbox}
+	% 				};
 					
-				\coordinate (g1TL) at ([xshift=-12pt,yshift=8pt]blk1TL);
-				\coordinate (g1BR) at ([xshift=90pt,yshift=-1pt]blk1BR);
-				\draw[green!60!black, line width=1.0pt] (g1TL) rectangle (g1BR);
+	% 			\coordinate (g1TL) at ([xshift=-12pt,yshift=8pt]blk1TL);
+	% 			\coordinate (g1BR) at ([xshift=90pt,yshift=-1pt]blk1BR);
+	% 			\draw[green!60!black, line width=1.0pt] (g1TL) rectangle (g1BR);
 				
-				% lấy điểm giữa + điểm cạnh phải để bắn mũi tên (KHÔNG dùng |-)
-				\coordinate (g1Mid) at ($(g1TL)!0.5!(g1BR)$);
-				\path let \p1=(g1BR), \p2=(g1Mid) in coordinate (g1Right) at (\x1,\y2);
+	% 			% lấy điểm giữa + điểm cạnh phải để bắn mũi tên (KHÔNG dùng |-)
+	% 			\coordinate (g1Mid) at ($(g1TL)!0.5!(g1BR)$);
+	% 			\path let \p1=(g1BR), \p2=(g1Mid) in coordinate (g1Right) at (\x1,\y2);
 				
-				% Box 2 (khối while... đến return)
-				\coordinate (g2TL) at ([xshift=-12pt,yshift=7pt]blk2TL);
-				\coordinate (g2BR) at ([xshift=90pt,yshift=-14pt]blk2BR);
-				\draw[green!60!black, line width=1.0pt] (g2TL) rectangle (g2BR);
+	% 			% Box 2 (khối while... đến return)
+	% 			\coordinate (g2TL) at ([xshift=-12pt,yshift=7pt]blk2TL);
+	% 			\coordinate (g2BR) at ([xshift=90pt,yshift=-14pt]blk2BR);
+	% 			\draw[green!60!black, line width=1.0pt] (g2TL) rectangle (g2BR);
 				
-				\coordinate (g2Mid) at ($(g2TL)!0.5!(g2BR)$);
-				\path let \p1=(g2BR), \p2=(g2Mid) in coordinate (g2Right) at (\x1,\y2);
-				\end{tikzpicture}
-			\end{column}
+	% 			\coordinate (g2Mid) at ($(g2TL)!0.5!(g2BR)$);
+	% 			\path let \p1=(g2BR), \p2=(g2Mid) in coordinate (g2Right) at (\x1,\y2);
+	% 			\end{tikzpicture}
+	% 		\end{column}
 			
-			% ====== COL 3: notes + arrows (phải) ======
-			% ====== COL 3: notes + arrows (phải) ======
-			\begin{column}{0.40\textwidth}
-				% để trống nội dung layout, vì note+arrow sẽ vẽ overlay theo tọa độ global
-				\vspace{0pt}
+	% 		% ====== COL 3: notes + arrows (phải) ======
+	% 		% ====== COL 3: notes + arrows (phải) ======
+	% 		\begin{column}{0.40\textwidth}
+	% 			% để trống nội dung layout, vì note+arrow sẽ vẽ overlay theo tọa độ global
+	% 			\vspace{0pt}
 				
-				\begin{tikzpicture}[remember picture,overlay]
-					% ---- đặt note theo đúng cao độ của code (global) ----
-					% x = cạnh phải codebox + 1.05cm ; y = y của mkEmpty / g1Mid / g2Mid
-					\path let \p1=(codebox.east), \p2=(mkEmpty) in
-					coordinate (posN1) at (\x1+1.05cm,\y2);
-					\path let \p1=(codebox.east), \p2=(g1Mid) in
-					coordinate (posN2) at (\x1+1.05cm,\y2);
-					\path let \p1=(codebox.east), \p2=(g2Mid) in
-					coordinate (posN3) at (\x1+1.05cm,\y2);
+	% 			\begin{tikzpicture}[remember picture,overlay]
+	% 				% ---- đặt note theo đúng cao độ của code (global) ----
+	% 				% x = cạnh phải codebox + 1.05cm ; y = y của mkEmpty / g1Mid / g2Mid
+	% 				\path let \p1=(codebox.east), \p2=(mkEmpty) in
+	% 				coordinate (posN1) at (\x1+1.05cm,\y2);
+	% 				\path let \p1=(codebox.east), \p2=(g1Mid) in
+	% 				coordinate (posN2) at (\x1+1.05cm,\y2);
+	% 				\path let \p1=(codebox.east), \p2=(g2Mid) in
+	% 				coordinate (posN3) at (\x1+1.05cm,\y2);
 					
-					\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
-					text width=0.60\textwidth, minimum height=1.05cm,
-					anchor=west] at (posN1)
-					{Nếu hàng đợi rỗng, trả về rỗng};
+	% 				\node (note1) [draw, rectangle, thick, align=center, font=\scriptsize,
+	% 				text width=0.60\textwidth, minimum height=1.05cm,
+	% 				anchor=west] at (posN1)
+	% 				{Nếu hàng đợi rỗng, trả về rỗng};
 					
-					\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
-					text width=0.70\textwidth, minimum height=1.20cm,
-					anchor=west] at (posN2)
-					{Nếu hàng đợi chỉ có một phần tử};
+	% 				\node (note2) [draw, rectangle, thick, align=center, font=\scriptsize,
+	% 				text width=0.70\textwidth, minimum height=1.20cm,
+	% 				anchor=west] at (posN2)
+	% 				{Nếu hàng đợi chỉ có một phần tử};
 					
-					\node (note3) [draw, rectangle, thick, align=center, font=\scriptsize,
-					text width=0.70\textwidth, minimum height=2.10cm,
-					anchor=west] at (posN3)
-					{Nếu hàng đợi có nhiều hơn một phần tử, lấy phần tử cuối cùng của danh sách};
+	% 				\node (note3) [draw, rectangle, thick, align=center, font=\scriptsize,
+	% 				text width=0.70\textwidth, minimum height=2.10cm,
+	% 				anchor=west] at (posN3)
+	% 				{Nếu hàng đợi có nhiều hơn một phần tử, lấy phần tử cuối cùng của danh sách};
 					
-					% ---- ARROWS (không bị Dimension too large nữa) ----
-					\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
+	% 				% ---- ARROWS (không bị Dimension too large nữa) ----
+	% 				\tikzset{myarr/.style={-Stealth, line width=0.85pt}}
 					
-					\coordinate (tEmpty) at ([xshift=-2pt,yshift=3pt]mkEmpty);
-					\coordinate (tOne)   at ([xshift=0pt,yshift=0pt]g1Right);
-					\coordinate (tMany)  at ([xshift=0pt,yshift=0pt]g2Right);
+	% 				\coordinate (tEmpty) at ([xshift=-2pt,yshift=3pt]mkEmpty);
+	% 				\coordinate (tOne)   at ([xshift=0pt,yshift=0pt]g1Right);
+	% 				\coordinate (tMany)  at ([xshift=0pt,yshift=0pt]g2Right);
 					
-					% dùng đường cong theo format bạn muốn (không dùng |- khi vẽ)
-					\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.10] (tEmpty);
-					\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.10] (tOne);
-					\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.10] (tMany);
-				\end{tikzpicture}
-			\end{column}
+	% 				% dùng đường cong theo format bạn muốn (không dùng |- khi vẽ)
+	% 				\draw[myarr] (note1.west) to[out=180,in=0,looseness=1.10] (tEmpty);
+	% 				\draw[myarr] (note2.west) to[out=180,in=0,looseness=1.10] (tOne);
+	% 				\draw[myarr] (note3.west) to[out=180,in=0,looseness=1.10] (tMany);
+	% 			\end{tikzpicture}
+	% 		\end{column}
 			
 			
-		\end{columns}
-	\end{frame}
+	% 	\end{columns}
+	% \end{frame}
 	
 		
 		
